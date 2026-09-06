@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/suprabase';
+import { supabase } from '../lib/supabase';
 import { useCartStore } from '../store/useCartStore';
+import Link from 'next/link';
 
 interface Producto {
   id: string;
@@ -59,6 +60,17 @@ export default function Home() {
             <span className="text-sm font-semibold text-blue-900">🛒 {getTotalItems()} productos</span>
             <span className="text-sm font-bold text-green-600">${getTotalPrice().toLocaleString('es-CO')}</span>
           </div>
+          {/* Resumen del Carrito en el Header */}
+          <Link 
+            href="/checkout" 
+            className="bg-blue-50 hover:bg-blue-100 border border-blue-200 px-4 py-2 rounded-xl flex items-center gap-3 transition-colors shadow-sm"
+          >
+            <span className="text-sm font-semibold text-blue-900">🛒 {getTotalItems()} productos</span>
+            <span className="text-sm font-bold text-green-600">${getTotalPrice().toLocaleString('es-CO')}</span>
+            <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-md font-bold ml-2 hover:bg-blue-700">
+              Ir a pagar
+            </span>
+          </Link>
         </div>
       </header>
 
