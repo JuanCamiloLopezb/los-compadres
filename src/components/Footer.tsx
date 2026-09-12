@@ -7,7 +7,7 @@ export function Footer() {
         
         {/* Columna 1: Branding y Propósito */}
         <div className="space-y-3">
-          <h3 className="text-2xl font-black text-white tracking-tight">🥃 Los Compadres</h3>
+          <h3 className="text-2xl font-black text-white tracking-tight">Los Compadres</h3>
           <p className="text-xs text-zinc-400 leading-relaxed">
             Tu licorería express de confianza. Entregas frías y garantizadas en minutos directamente a tu puerta.
           </p>

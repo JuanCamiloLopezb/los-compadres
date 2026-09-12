@@ -1,9 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Toaster } from 'sonner'; // 1. IMPORTAR TOASTER
+import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
+});
 
 export const metadata: Metadata = {
   title: 'El Compadre - Licorería Express',
@@ -12,20 +19,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="es">
-      <body className={inter.className}>
+    <html lang="es" className={`${jakarta.variable} ${playfair.variable}`}>
+      <body className="antialiased bg-[#fafaf8] text-[#1c1c1c]">
         {children}
-        
-        {/* 2. INSERTAR TOASTER AQUÍ (Personalizado con los colores de El Compadre) */}
-        <Toaster 
-          position="bottom-right" 
-          richColors 
-          closeButton 
-        />
       </body>
     </html>
   );

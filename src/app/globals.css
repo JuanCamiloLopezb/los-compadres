@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -7,125 +8,37 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 }
 
 :root {
   --background: #fafaf8;
-  --foreground: #202020;
-  --card: #ffffff;
-  --card-foreground: #202020;
-  --popover: #ffffff;
-  --popover-foreground: #202020;
+  --foreground: #1c1c1c;
   --primary: #073b78;
-  --primary-foreground: #ffffff;
-  --secondary: #eeeadd;
-  --secondary-foreground: #202020;
-  --muted: #f5f5f2;
-  --muted-foreground: #6b6b6b;
   --accent: #b88a3b;
-  --accent-foreground: #ffffff;
-  --border: #deded9;
-  --input: #deded9;
-  --ring: #073b78;
-  --radius: 0.5rem;
-  --font-sans: Arial, Helvetica, sans-serif;
-}
-
-.dark {
-  --background: #181818;
-  --foreground: #ffffff;
-  --card: #222222;
-  --card-foreground: #ffffff;
-  --popover: #222222;
-  --popover-foreground: #ffffff;
-  --primary: #ffffff;
-  --primary-foreground: #073b78;
-  --secondary: #2c2c2c;
-  --secondary-foreground: #ffffff;
-  --muted: #2c2c2c;
-  --muted-foreground: #bdbdbd;
-  --accent: #d0a04c;
-  --accent-foreground: #ffffff;
-  --border: #3a3a3a;
-  --input: #3a3a3a;
-  --ring: #ffffff;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   html {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     scroll-behavior: smooth;
+    font-size: 15px;
   }
+
+  @media (min-width: 1280px) {
+    html {
+      font-size: 16.5px;
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
     margin: 0;
     padding: 0;
   }
-  button,
-  a {
-    -webkit-tap-highlight-color: transparent;
-  }
-  ::selection {
-    background: #073b78;
-    color: white;
-  }
 }
 
 .font-serif {
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f5f5f2;
-}
-::-webkit-scrollbar-thumb {
-  background: #073b78;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #052d5e;
-}
-
-button, img {
-  transition-property: transform, background-color, color, border-color, box-shadow, opacity;
-  transition-duration: 200ms;
-  transition-timing-function: ease;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-up {
-  animation: fadeUp 0.6s ease-out both;
+  font-family: 'Playfair Display', Georgia, serif;
 }
