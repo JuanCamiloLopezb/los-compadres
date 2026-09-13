@@ -17,29 +17,43 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
+          cookiesToSet.forEach(({ name, value }) => {
+            request.cookies.set(name, value);
+          });
+
           response = NextResponse.next({
             request,
           });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
-          );
+
+          cookiesToSet.forEach(({ name, value, options }) => {
+            response.cookies.set(name, value, options);
+          });
         },
       },
     }
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // Proteger rutas de administración
   if (request.nextUrl.pathname.startsWith('/admin')) {
+    // Si no está autenticado, enviar al login
     if (!user) {
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(
+        new URL('/login', request.url)
+      );
     }
 
+    // Obtener el rol del usuario
     const rol = user.user_metadata?.rol;
-    if (rol !== 'admin') {
-      return NextResponse.redirect(new URL('/', request.url));
+
+    // Solo los administradores pueden entrar
+    if (rol !== 'administrador') {
+      return NextResponse.redirect(
+        new URL('/', request.url)
+      );
     }
   }
 

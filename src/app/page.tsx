@@ -18,7 +18,8 @@ import {
   GlassWater,
   User,
   Package,
-  LogOut
+  LogOut,
+  ShoppingBag
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -30,6 +31,7 @@ interface Producto {
   precio: number;
   stock: number;
   categoria: string;
+  subcategoria?: string;
   imagen_url?: string;
 }
 
@@ -38,6 +40,7 @@ const CATEGORIAS_HERO = [
   { nombre: 'Ron', icono: Wine },
   { nombre: 'Aguardiente', icono: Martini },
   { nombre: 'Cervezas', icono: Beer },
+  { nombre: 'Snacks', icono: ShoppingBag },
 ];
 
 /*
@@ -135,6 +138,25 @@ export default function Home() {
     window.location.reload();
   };
 
+  /*
+  |--------------------------------------------------------------------------|
+  | AGREGAR PRODUCTO AL CARRITO                                              |
+  |--------------------------------------------------------------------------|
+  */
+
+  const handleAgregarAlCarrito = async (producto: Producto) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      setAuthModalOpen(true);
+      return;
+    }
+
+    addItem(producto);
+  };
+
   const productosFiltrados = productos.filter((p) => {
     const coincideCategoria =
       categoriaActiva === 'Todos' ||
@@ -201,9 +223,9 @@ export default function Home() {
             className="flex items-center gap-3"
           >
             <img
-            src="/image/Logo.jpeg"
-            alt="El Compadre"
-            className="h-14 w-auto object-contain rounded-full border border-white/20"
+              src="/image/Logo.jpeg"
+              alt="El Compadre"
+              className="h-14 w-auto object-contain rounded-full border border-white/20"
             />
           </Link>
 
@@ -983,7 +1005,9 @@ export default function Home() {
                     {cantidad === 0 ? (
 
                       <button
-                        onClick={() => addItem(producto)}
+                        onClick={() =>
+                          handleAgregarAlCarrito(producto)
+                        }
                         className="w-full bg-[#073b78] hover:bg-[#052d5e] text-white text-xs font-bold uppercase py-2.5 tracking-wider transition-colors cursor-pointer"
                       >
                         Agregar
@@ -1010,7 +1034,7 @@ export default function Home() {
 
                         <button
                           onClick={() =>
-                            addItem(producto)
+                            handleAgregarAlCarrito(producto)
                           }
                           className="w-8 h-8 font-bold bg-[#073b78] text-white cursor-pointer"
                         >
@@ -1038,3 +1062,4 @@ export default function Home() {
     </div>
   );
 }
+
